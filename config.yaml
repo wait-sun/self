@@ -9,7 +9,7 @@ proxy-providers:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 300
-    proxy: 直连
+    proxy: DIRECT
   tag:
     url: "订阅机场"
     type: http
@@ -18,12 +18,8 @@ proxy-providers:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 300
-    proxy: 直连
+    proxy: DIRECT
 
-# 节点信息
-proxies:
-  - {name: 拒绝, type: reject}
-  - {name: 直连, type: direct}
 
 # 全局配置 
 port: 7890 # HTTP 代理端口
@@ -121,7 +117,12 @@ dns:
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
- 
+
+# 节点信息
+proxies:
+  - {name: 拒绝, type: reject}
+  - {name: 直连, type: direct}
+
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🚀 默认代理, 🚀 手动选择, 直连, 🎮 游戏节点, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动]}
@@ -233,7 +234,7 @@ rule-providers:
 
   #代理
   #国外DNS
-  proxy_dns: { <<: *class, url: "https://raw.githubusercontent.com/wait-sun/rule.yaml/refs/heads/main/proxy/dns.list"}
+  proxy_dns: { <<: *class, url: "https://raw.githubusercontent.com/wait-sun/self/refs/heads/main/proxy/dns.list"}
 
   #国外网址
   ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
