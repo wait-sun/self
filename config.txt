@@ -9,7 +9,7 @@ proxy-providers:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 300
-    proxy: 直连
+    proxy: DIRECT
   tag:
     url: "订阅机场"
     type: http
@@ -18,7 +18,7 @@ proxy-providers:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 300
-    proxy: 直连
+    proxy: DIRECT
 
 
 # 全局配置 
@@ -109,12 +109,14 @@ dns:
   #fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
-    - "+.lan"
     - rule-set:private_domain
     - rule-set:cn_domain
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - "time.*.com"
+    - "*"
+    - "+.lan"
+    - "+.local"
+    #- "+.msftconnecttest.com"
+    #- "+.msftncsi.com"
+    #- "time.*.com"
   default-nameserver:
     - 223.5.5.5
   #proxy-server-nameserver:
@@ -137,7 +139,7 @@ proxies:
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [默认代理,手动选择, 直连, 游戏节点, 家宽, 香港自动, 日本自动, 美国自动, 台湾自动]}
+pr: &pr {type: select, proxies: [默认代理,手动选择, 直连, 游戏节点, 家宽, 香港自动选择, 日本自动选择, 美国自动选择]}
 proxy-groups:
   - {name: 默认代理, type: select, include-all: true}
   - {name: 手动选择, type: select, include-all: true}  
@@ -168,10 +170,10 @@ proxy-groups:
   - {name: 家宽, type: select, include-all: true, filter: "(?i)家宽|家庭宽带|家用宽带|家用光纤"}
   #- {name: 香港故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   #- {name: 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
-  - {name: 香港自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)港|hk|hongkong|hong kong", exclude-filter: "(?i)台|日|韩|新|深|美|福利|星链"}
-  - {name: 日本自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)日|jp|japan", exclude-filter: "(?i)尼|福利|星链"}
-  - {name: 美国自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)美|us|unitedstates|united states", exclude-filter: "(?i)亚|福利|星链"}
-  - {name: 台湾自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)台|tw|taiwan", exclude-filter: "(?i)港|日|韩|新|美|深|福利|星链"}
+  - {name: 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美|星链|福利)).)*$"}
+  - {name: 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(尼|星链|福利)).)*$" }
+  - {name: 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|America))^((?!(亚|星链|福利)).)*$"}
+  - {name: 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(星链|福利)).)*$"}
 
 
 # 规则匹配
@@ -250,7 +252,7 @@ rule-providers:
   category_ads_all: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs"}
 
   #国外网址
-  ai: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
+  ai: {  <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
   google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   github_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
