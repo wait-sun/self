@@ -138,8 +138,8 @@ proxies:
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [默认代理,手动选择, 直连, 游戏节点, 家宽, 香港自动, 日本自动, 美国自动, 台湾自动]}
 proxy-groups:
-  - {name: 默认代理, type: select, include-all: true}
-  - {name: 手动选择, type: select, include-all: true}  
+  - {name: 默认代理, type: select, include-all: true, exclude-filter: "(?i)拒绝|直连"}
+  - {name: 手动选择, type: select, include-all: true, exclude-filter: "(?i)拒绝|直连"}  
   - {name: AdBlock, type: select, proxies: [直连, 拒绝, 默认代理]}
   - {name: 哔哩哔哩, <<: *pr}
   - {name: Ehentai, <<: *pr}
