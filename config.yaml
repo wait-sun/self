@@ -105,7 +105,7 @@ dns:
   enable: true
   #listen: 0.0.0.0:53
   ipv6: false
-  #respect-rules: true
+  respect-rules: true
   enhanced-mode: fake-ip
   #fake-ip-range: 28.0.0.1/8
   fake-ip-filter-mode: blacklist
@@ -185,6 +185,7 @@ rules:
   - RULE-SET,onedrive_domain,OneDrive
   - RULE-SET,game_download,游戏下载
   - RULE-SET,category_games_cn,直连
+  - RULE-SET,bilibili_domain,哔哩哔哩  
 
   #网址操作
   - RULE-SET,ehentai_domain,Ehentai
@@ -199,7 +200,6 @@ rules:
   - RULE-SET,twitter_domain,Twitter
   - RULE-SET,netflix_domain,NETFLIX
   - RULE-SET,paypal_domain,PayPal
-  - RULE-SET,bilibili_domain,哔哩哔哩
 
   - RULE-SET,cn_domain,直连
 
