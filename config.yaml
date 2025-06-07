@@ -178,6 +178,10 @@ rules:
   - RULE-SET,private_ip,直连,no-resolve
   - RULE-SET,private_domain,直连
 
+  #手动优化
+  #- RULE-SET,direct_optimized,直连
+  #- RULE-SET,proxy_optimized,默认代理
+
   - RULE-SET,category_ads_all,AdBlock
 
   - RULE-SET,apple_cn_domain,苹果中国
@@ -222,7 +226,8 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers: 
   #手动优化
-  #private_optimized: { <<: *class, url: ""}
+  direct_optimized: { <<: *class, url: "https://raw.githubusercontent.com/wait-sun/self/refs/heads/main/direct/direct.list"}
+  proxy_optimized: { <<: *class, url: "https://raw.githubusercontent.com/wait-sun/self/refs/heads/main/proxy/proxy.list"}
 
   #直连
   #本地域名和ip
