@@ -179,8 +179,8 @@ rules:
   - RULE-SET,private_domain,直连
 
   #手动优化
-  #- RULE-SET,direct_optimized,直连
-  #- RULE-SET,proxy_optimized,默认代理
+  - RULE-SET,direct_optimized,直连
+  - RULE-SET,proxy_optimized,默认代理
 
   - RULE-SET,category_ads_all,AdBlock
 
