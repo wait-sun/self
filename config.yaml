@@ -211,11 +211,12 @@ rules:
   - RULE-SET,geolocation-!cn,默认代理
 
   #ip操作
+  - RULE-SET,cn_ip,直连
   - RULE-SET,google_ip,Google
   - RULE-SET,netflix_ip,NETFLIX
   - RULE-SET,telegram_ip,Telegram
   - RULE-SET,twitter_ip,Twitter
-  - RULE-SET,cn_ip,直连
+
 
   - MATCH,漏网之鱼
 
