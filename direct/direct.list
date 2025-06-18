@@ -1,6 +1,8 @@
 #直连补充列表
 
 # 域名后缀匹配
+
+#Windows校时
 DOMAIN-SUFFIX,time.windows.com
 
 # 域名关键字匹配
