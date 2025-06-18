@@ -181,6 +181,7 @@ rules:
   #手动优化
   - RULE-SET,direct_optimized,直连
   - RULE-SET,proxy_optimized,默认代理
+  - RULE-SET,jd_domain,直连
 
   - RULE-SET,category_ads_all,AdBlock
 
@@ -189,7 +190,7 @@ rules:
   - RULE-SET,onedrive_domain,OneDrive
   - RULE-SET,game_download,游戏下载
   - RULE-SET,category_games_cn,直连
-  - RULE-SET,bilibili_domain,哔哩哔哩  
+  - RULE-SET,bilibili_domain,哔哩哔哩
 
   #网址操作
   - RULE-SET,ehentai_domain,Ehentai
@@ -238,6 +239,11 @@ rule-providers:
   #国内网址
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   bilibili_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"}
+
+  #京东
+  jd_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/jd.mrs"}
+
+
   #国内游戏
   category_games_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games%40cn.mrs"}
 
