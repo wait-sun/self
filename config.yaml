@@ -158,13 +158,16 @@ proxy-groups:
   #默认直连
   - {name: 苹果中国, type: select, proxies: [直连, 默认代理, 手动选择]}
   - {name: 微软中国, type: select, proxies: [直连, 默认代理, 手动选择]}
-  - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 手动选择]}
+  - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 手动选择, 下载节点]}
   - {name: OneDrive, type: select, proxies: [直连, 默认代理, 手动选择]}
+
+  - {name: 游戏节点, type: select, proxies: [直连, 手动选择, 游戏, 家宽]}
 
   - {name: 漏网之鱼, <<: *pr}
 
-  - {name: 游戏节点, type: select, include-all: true, filter: "(?i)游戏"}
+  - {name: 游戏, type: select, include-all: true, filter: "(?i)游戏"}
   - {name: 家宽, type: select, include-all: true, filter: "(?i)家宽|家庭宽带|家用宽带|家用光纤"}
+  - {name: 下载节点, type: select, include-all: true, filter: "(?i)下载"}
   #- {name: 香港故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   #- {name: 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
   - {name: 香港自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)港|hk|hongkong|hong kong", exclude-filter: "(?i)台|日|韩|新|深|美|福利|星链"}
@@ -189,8 +192,11 @@ rules:
   - RULE-SET,apple_cn_domain,苹果中国
   - RULE-SET,microsoft_cn_domain,微软中国
   - RULE-SET,onedrive_domain,OneDrive
-  - RULE-SET,game_download,游戏下载
   - RULE-SET,category_games_cn,直连
+  - RULE-SET,category-games-!cn@cn,直连
+  - RULE-SET,category-games-!cn,游戏节点
+  - RULE-SET,game_download_cn,游戏下载
+  - RULE-SET,game_download,游戏下载
   - RULE-SET,bilibili_domain,哔哩哔哩
 
   #网址操作
@@ -240,13 +246,18 @@ rule-providers:
   #国内网址
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
   bilibili_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"}
-
   #京东
   jd_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/jd.mrs"}
 
-
+  #游戏服务
   #国内游戏
-  category_games_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games%40cn.mrs"}
+  category_games_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-cn.mrs"}
+  category-games-!cn@cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn%40cn.mrs"}
+  #海外游戏
+  category-games-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn.mrs"}
+  #游戏下载
+  game_download_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download%40cn.mrs"}
+  game_download: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download.mrs"}
 
   #国内ip
   cn_ip: { <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
@@ -254,8 +265,6 @@ rule-providers:
   apple_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
   microsoft_cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft%40cn.mrs"}
 
-  #游戏下载
-  game_download: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download%40cn.mrs"}
 
   #拒绝服务
   #广告
