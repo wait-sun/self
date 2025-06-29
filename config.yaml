@@ -161,6 +161,7 @@ proxy-groups:
   - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 手动选择, 下载节点]}
   - {name: OneDrive, type: select, proxies: [直连, 默认代理, 手动选择]}
 
+  - {name: EpicGames, type: select, proxies: [直连, 默认代理, 手动选择, 游戏, 家宽]}
   - {name: 游戏节点, type: select, proxies: [直连, 默认代理, 手动选择, 游戏, 家宽]}
 
   - {name: 漏网之鱼, <<: *pr}
@@ -192,6 +193,7 @@ rules:
   - RULE-SET,apple_cn_domain,苹果中国
   - RULE-SET,microsoft_cn_domain,微软中国
   - RULE-SET,onedrive_domain,OneDrive
+  - RULE-SET,epicgames_domain,EpicGames
   - RULE-SET,game_download_cn,游戏下载
   - RULE-SET,game_download,游戏下载
   - RULE-SET,category_games_cn,直连
@@ -253,6 +255,8 @@ rule-providers:
   #国内游戏
   category_games_cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-cn.mrs"}
   category-games-!cn@cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn%40cn.mrs"}
+  #epic
+  epicgames_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/epicgames.mrs"}
   #海外游戏
   category-games-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn.mrs"}
   #游戏下载
