@@ -192,10 +192,10 @@ rules:
   - RULE-SET,apple_cn_domain,苹果中国
   - RULE-SET,microsoft_cn_domain,微软中国
   - RULE-SET,onedrive_domain,OneDrive
-  - RULE-SET,category_games_cn,直连
-  - RULE-SET,category-games-!cn@cn,直连
   - RULE-SET,game_download_cn,游戏下载
   - RULE-SET,game_download,游戏下载
+  - RULE-SET,category_games_cn,直连
+  - RULE-SET,category-games-!cn@cn,直连
   - RULE-SET,category-games-!cn,游戏节点
   - RULE-SET,bilibili_domain,哔哩哔哩
 
