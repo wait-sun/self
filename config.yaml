@@ -161,7 +161,7 @@ proxy-groups:
   - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 手动选择, 下载节点]}
   - {name: OneDrive, type: select, proxies: [直连, 默认代理, 手动选择]}
 
-  - {name: 游戏节点, type: select, proxies: [直连, 手动选择, 游戏, 家宽]}
+  - {name: 游戏节点, type: select, proxies: [直连, 默认代理, 手动选择, 游戏, 家宽]}
 
   - {name: 漏网之鱼, <<: *pr}
 
