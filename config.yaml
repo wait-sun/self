@@ -1,8 +1,7 @@
-# 规则在满足自己需求情况下，尽量做到精简。
 # 机场订阅
 proxy-providers:
   fastlink:
-    url: "订阅机场"
+    url: "订阅机场1"
     type: http
     interval: 86400
     health-check:
@@ -12,7 +11,7 @@ proxy-providers:
     proxy: 直连
     exclude-filter: "(?i)网址|剩余|过期"
   tag:
-    url: "订阅机场"
+    url: "订阅机场2"
     type: http
     interval: 86400
     health-check:
@@ -23,11 +22,11 @@ proxy-providers:
 
 
 # 全局配置 
-#port: 7890 # HTTP 代理端口
-#socks-port: 7891 # SOCKS5 代理端口
-#redir-port: 7892 # Linux 和 macOS 的 redir 代理端口
+port: 7890 # HTTP 代理端口
+socks-port: 7891 # SOCKS5 代理端口
+redir-port: 7892 # Linux 和 macOS 的 redir 代理端口
 mixed-port: 7893 # HTTP(S) 和 SOCKS 代理混合端口
-#tproxy-port: 7894
+tproxy-port: 7894
 
 allow-lan: true # 允许局域网的连接
 bind-address: "*" # 绑定 IP 地址，仅作用于 allow-lan 为 true，'*'表示所有地址
@@ -136,10 +135,11 @@ proxies:
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [默认代理,手动选择, 直连, 游戏节点, 家宽, 香港自动, 日本自动, 美国自动, 台湾自动]}
+pr: &pr {type: select, proxies: [默认代理, 直连, 游戏节点, 家宽, 香港自动, 日本自动, 美国自动, 台湾自动]}
 proxy-groups:
-  - {name: 默认代理, type: select, include-all: true, exclude-filter: "(?i)拒绝|直连"}
-  - {name: 手动选择, type: select, include-all: true, exclude-filter: "(?i)拒绝|直连"}  
+  - {name: 默认代理, type: select, proxies: [直连, 机场1 ,机场2]}
+  - {name: 机场1, type: select, use: [fastlink]}
+  - {name: 机场2, type: select, use: [tag]}
   - {name: AdBlock, type: select, proxies: [直连, 拒绝, 默认代理]}
   - {name: 哔哩哔哩, <<: *pr}
   - {name: Ehentai, <<: *pr}
@@ -156,13 +156,13 @@ proxy-groups:
   - {name: PayPal, <<: *pr}
 
   #默认直连
-  - {name: 苹果中国, type: select, proxies: [直连, 默认代理, 手动选择]}
-  - {name: 微软中国, type: select, proxies: [直连, 默认代理, 手动选择]}
-  - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 手动选择, 下载节点]}
-  - {name: OneDrive, type: select, proxies: [直连, 默认代理, 手动选择]}
+  - {name: 苹果中国, type: select, proxies: [直连, 默认代理]}
+  - {name: 微软中国, type: select, proxies: [直连, 默认代理]}
+  - {name: 游戏下载, type: select, proxies: [直连, 默认代理, 下载节点]}
+  - {name: OneDrive, type: select, proxies: [直连, 默认代理]}
 
-  - {name: EpicGames, type: select, proxies: [直连, 默认代理, 手动选择, 游戏, 家宽]}
-  - {name: 游戏节点, type: select, proxies: [直连, 默认代理, 手动选择, 游戏, 家宽]}
+  - {name: EpicGames, type: select, proxies: [直连, 默认代理, 游戏, 家宽]}
+  - {name: 游戏节点, type: select, proxies: [直连, 默认代理, 游戏, 家宽]}
 
   - {name: 漏网之鱼, <<: *pr}
 
@@ -190,16 +190,17 @@ rules:
 
   - RULE-SET,category_ads_all,AdBlock
 
+  - RULE-SET,bilibili_domain,哔哩哔哩
   - RULE-SET,apple_cn_domain,苹果中国
   - RULE-SET,microsoft_cn_domain,微软中国
   - RULE-SET,onedrive_domain,OneDrive
-  - RULE-SET,epicgames_domain,EpicGames
   - RULE-SET,game_download_cn,游戏下载
   - RULE-SET,game_download,游戏下载
   - RULE-SET,category_games_cn,直连
   - RULE-SET,category-games-!cn@cn,直连
+  - RULE-SET,epicgames_domain,EpicGames
   - RULE-SET,category-games-!cn,游戏节点
-  - RULE-SET,bilibili_domain,哔哩哔哩
+
 
   #网址操作
   - RULE-SET,ehentai_domain,Ehentai
@@ -221,12 +222,11 @@ rules:
   - RULE-SET,geolocation-!cn,默认代理
 
   #ip操作
+  - RULE-SET,google_ip,Google,no-resolve
+  - RULE-SET,netflix_ip,NETFLIX,no-resolve
+  - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,twitter_ip,Twitter,no-resolve
   - RULE-SET,cn_ip,直连
-  - RULE-SET,google_ip,Google
-  - RULE-SET,netflix_ip,NETFLIX
-  - RULE-SET,telegram_ip,Telegram
-  - RULE-SET,twitter_ip,Twitter
-
 
   - MATCH,漏网之鱼
 
