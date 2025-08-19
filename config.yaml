@@ -203,10 +203,10 @@ rules:
 
 
   #网址操作
+  - RULE-SET,ai,境外AI
   - RULE-SET,ehentai_domain,Ehentai
   - RULE-SET,youtube_domain,YouTube
   - RULE-SET,google_domain,Google
-  - RULE-SET,ai,境外AI
   - RULE-SET,github_domain,GitHub
   - RULE-SET,microsoft_domain,Microsoft
   #- RULE-SET,tiktok_domain,TikTok
