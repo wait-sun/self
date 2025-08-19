@@ -173,7 +173,7 @@ proxy-groups:
   #- {name: 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$" }
   - {name: 香港自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)港|hk|hongkong|hong kong", exclude-filter: "(?i)台|日|韩|新|深|美|福利|星链"}
   - {name: 日本自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)日|jp|japan", exclude-filter: "(?i)尼|福利|星链"}
-  - {name: 美国自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)美|us|unitedstates|united states", exclude-filter: "(?i)亚|福利|星链"}
+  - {name: 美国自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)美|us|unitedstates|united states", exclude-filter: "(?i)亚|福利|星链|属|和"}
   - {name: 台湾自动, type: url-test, exclude-type: direct, include-all: true, tolerance: 20, interval: 300, filter: "(?i)台|tw|taiwan", exclude-filter: "(?i)港|日|韩|新|美|深|福利|星链"}
 
 
